@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="./controller.js"></script>
+    <title>
+        Govt Profiling
+    </title>
+</head>
+
+<body ng-app="app">
+
+    <div class="container" ng-controller="userController">
+        <div ng-if="isSubmitted">
+            {{a}} {{selectedCountry}} {{selectedgender}} {{name}} {{age}}
+            <h2>
+                <label>Govt Information</label>
+            </h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Name:</label>
+                    <input type="text" name="name" placeholder="Enter your name" ng-model="name" required>
+                    <span ng-show="name.$touched && name.$invalid && name.$pristine">The name is required.</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label> Age:</label>
+                    <input type="text" placeholder="Enter your age" value={{age}} ng-model="age" required
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Sex:</label>
+                    <label class="radio-inline" for="radio5">
+                        <input type="radio" name="sex" value="Male" ng-model="selectedgender" required >Male</Label>
+                    <label class="radio-inline" for="radio5">
+                        <input type="radio" name="sex" value="Female" ng-model="selectedgender" required>Female</Label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="repeatSelect"> Select Country </label>
+                    <select name="repeatSelect" id="repeatSelect" ng-model="selectedCountry" required>
+                        <option ng-repeat="option in CountryList" value="{{option.name}}">{{option.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="submit" type="button" class="btn btn-sm btn-info" name="Submit" ng-click="onsubmit(selectedCountry,selectedgender,name,age)">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div ng-if="!isSubmitted">
+            <h2>Application Complete</h2>
+           <label ><p>{{name}} Thank you for applying to<br>this useful government service</p></label>  
+        </div>
+    </div>
+
+
+</body>
+
+</html>

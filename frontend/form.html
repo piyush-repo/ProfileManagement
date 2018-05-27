@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="./controller.js"></script>
+    <title>
+        Govt Profiling
+    </title>
+    
+</head>
+
+<body ng-app="app">
+
+    <div class="container" ng-controller="userController">
+        
+        <form ng-if="isSubmitted"name="myform" ng-submit="onsubmit(selectedCountry, selectedgender, name, age)"novalidate>
+                <h1>Govt useful information</h1>
+            Name :
+            <input type="text" name="name"ng-model="name" required>
+            <span style="color:red" ng-show="myform.name.$dirty && myform.name.$invalid">
+                <span ng-show="myform.name.$error.required">Name is required</span>
+            </span>
+            <br>
+            <br>&nbsp;&nbsp;&nbsp; Age:
+            <input type="number" name="age"ng-model="age" required>
+            <span style="color:red" ng-show="myform.age.$dirty && myform.age.$invalid">
+                    <span ng-show="myform.age.$error.required">Age is required</span>
+                </span>
+            <br>
+            <br>&nbsp;&nbsp;&nbsp; Sex:
+            <label class="radio-inline" for="radio5">
+                <input type="radio" name="sex" value="Male" ng-model="selectedgender" required>Male</Label>
+            <label class="radio-inline" for="radio5">
+                <input type="radio" name="sex" value="Female" ng-model="selectedgender" required>Female</Label>
+                <span style="color:red" class="error" ng-if="myForm.$submitted && myForm.gender.$error.required">Please fill field above<br></span>
+            <br>
+            <br>
+            <label for="repeatSelect"> Country </label>
+            <select name="Selectcountry" id="repeatSelect" ng-model="selectedCountry" required>
+                <option ng-repeat="option in CountryList" value="{{option.name}}">{{option.name}}</option>
+            </select><br><br>
+            <span style="color:red" class="error" ng-if="myForm.$submitted && myForm.Selectcountry.$error.required">Please select country<br></span><br/>
+            <input type="submit" ng-disabled="myform.name.$dirty && myform.name.$invalid && myform.Selectcountry.$dirty && myform.Selectcountry.$invalid "value="Submit" />
+        </form>
+        <div ng-if="!isSubmitted">
+            <h2>Application Complete</h2>
+            <label>
+                <p>{{name}} Thank you for applying to
+                    <br>this useful government service</p>
+            </label>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
