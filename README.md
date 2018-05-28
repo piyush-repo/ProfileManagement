@@ -11,3 +11,5 @@
 6. Run index.html under frontend folder
 7. Please install pm2 using npm install pm2 -g  
 8. Run pm2 index.js
+
+# The application comes with Server side input validation.
