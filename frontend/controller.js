@@ -4,7 +4,7 @@ app.controller("userController", function ($http, $scope) {
     $scope.age;
     $scope.CountryList;
     $scope.selectedCountry;
-    $scope.selectedgender;
+    $scope.selectedgender='Male';
     $scope.name;
     $scope.isSubmitted = true;
     $http.get("https://restcountries.eu/rest/v1/region/Europe").then((result) => {

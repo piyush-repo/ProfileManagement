@@ -17,59 +17,87 @@
     <title>
         Govt Profiling
     </title>
+
 </head>
 
 <body ng-app="app">
 
     <div class="container" ng-controller="userController">
-        <div ng-if="isSubmitted">
-            {{a}} {{selectedCountry}} {{selectedgender}} {{name}} {{age}}
-            <h2>
-                <label>Govt Information</label>
-            </h2>
-            <div class="row">
-                <div class="col-md-12">
-                    <label>Name:</label>
-                    <input type="text" name="name" placeholder="Enter your name" ng-model="name" required>
-                    <span ng-show="name.$touched && name.$invalid && name.$pristine">The name is required.</span>
+
+        <form ng-if="isSubmitted" name="myform" ng-submit="onsubmit(selectedCountry, selectedgender, name, age)" novalidate>
+            <h1>Govt useful information</h1>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>Name : </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="name" ng-model="name" required>
+                        <span style="color:red" ng-show="myform.name.$dirty && myform.name.$invalid">
+                            <span ng-show="myform.name.$error.required">Name is required</span>
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label> Age:</label>
-                    <input type="text" placeholder="Enter your age" value={{age}} ng-model="age" required
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>Age:</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" name="age" ng-model="age" required>
+                        <span style="color:red" ng-show="myform.age.$dirty && myform.age.$invalid">
+                            <span ng-show="myform.age.$error.required">Age is required</span>
+                        </span>
+                    </div>
                 </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>Sex:</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" value="Male" ng-model="selectedgender" required>Male</Label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" value="Female" ng-model="selectedgender" required>Female</Label>
+                        <span style="color:red" class="error" ng-if="myForm.sex.$error.required">Please fill field above
+                            <br>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label> Country: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <select name="Selectcountry" id="repeatSelect" ng-model="selectedCountry" required>
+                            <option ng-repeat="option in CountryList" value="{{option.name}}">{{option.name}}</option>
+                        </select>
+                        <span style="color:red" class="error" ng-if="myForm.Selectcountry.$error.required ">Please select country
+                            <br>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" ng-disabled="myform.age.$invalid || myform.name.$invalid  || myform.Selectcountry.$invalid ||  myform.sex.$invalid "
+                    value="Submit" />
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <label>Sex:</label>
-                    <label class="radio-inline" for="radio5">
-                        <input type="radio" name="sex" value="Male" ng-model="selectedgender" required >Male</Label>
-                    <label class="radio-inline" for="radio5">
-                        <input type="radio" name="sex" value="Female" ng-model="selectedgender" required>Female</Label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <label for="repeatSelect"> Select Country </label>
-                    <select name="repeatSelect" id="repeatSelect" ng-model="selectedCountry" required>
-                        <option ng-repeat="option in CountryList" value="{{option.name}}">{{option.name}}</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <button id="submit" type="button" class="btn btn-sm btn-info" name="Submit" ng-click="onsubmit(selectedCountry,selectedgender,name,age)">Submit</button>
-                </div>
-            </div>
-        </div>
+        </form>
         <div ng-if="!isSubmitted">
-            <h2>Application Complete</h2>
-           <label ><p>{{name}} Thank you for applying to<br>this useful government service</p></label>  
+            <h2><b>Application Complete</b></h2>
+            <label>
+               <span style="font-weight: bold;color:green;">{{name}} </span>Thank you for applying to
+                    <br>this useful government service</p>
+            </label>
         </div>
+
     </div>
 
 
