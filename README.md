@@ -7,6 +7,7 @@
 3. Install mongodb with version > 2.1.17
 4. Start your mongodb by running mongod on cmd prompt(Windows) or terminal(Linux,Mac)
 5. Then do npm install .
+6. please install redis as code comes with JWT token stuff but for smooth running just have it brfore starting the application.
 6. Run index.html under frontend folder
 7. Please install pm2 using npm install pm2 -g  
 8. Run pm2 index.js
